@@ -1,0 +1,54 @@
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git init 
+Reinitialized existing Git repository in C:/Users/marye/Downloads/bot_ktk_main-main/bot_ktk_main-main/.git/
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git commit -m "first commit"
+On branch main
+nothing to commit, working tree clean
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git branch -M main
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git remote add origin https://github.com/marwa12-cmd/chatbot123.git
+error: remote origin already exists.
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git push -u origin main
+remote: Repository not found.
+fatal: repository 'https://github.com/marwa12-cmd/chatbot.git/' not found
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git remote -v
+origin  https://github.com/marwa12-cmd/chatbot.git (fetch)
+origin  https://github.com/marwa12-cmd/chatbot.git (push)
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git remote remove origin
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git remote add origin https://github.com/marwa12-cmd/chatbot123.git
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git branch -M main                               
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git push -u origin main                          
+remote: Permission to marwa12-cmd/chatbot123.git denied to maryemlt.
+fatal: unable to access 'https://github.com/marwa12-cmd/chatbot123.git/': The requested URL returned error: 403
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git remote -v                                    
+origin  https://github.com/marwa12-cmd/chatbot123.git (fetch)
+origin  https://github.com/marwa12-cmd/chatbot123.git (push)
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git push -u origin main
+info: please complete authentication in your browser...
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git push -u origin main
+Enumerating objects: 47, done.
+Counting objects: 100% (47/47), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (44/44), done.
+Writing objects: 100% (47/47), 994.21 KiB | 948.00 KiB/s, done.
+Total 47 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), done.
+To https://github.com/marwa12-cmd/chatbot123.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git push -u origin main
+To https://github.com/marwa12-cmd/chatbot123.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/marwa12-cmd/chatbot123.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git init                                         
+Reinitialized existing Git repository in C:/Users/marye/Downloads/bot_ktk_main-main/bot_ktk_main-main/.git/
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git commit -m "first commit"                     
+On branch main    
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> git add .                   
+PS C:\Users\marye\Downloads\bot_ktk_main-main\bot_ktk_main-main> 
