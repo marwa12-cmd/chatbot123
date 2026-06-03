@@ -1,0 +1,53 @@
+name: Auto-Doc CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  autodoc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Trigger Auto-Doc extraction and documentation
+        env:
+          AUTODOC_API_URL: ${{ secrets.AUTODOC_API_URL }}
+          AUTODOC_PROJECT_ID: ${{ secrets.AUTODOC_PROJECT_ID }}
+          AUTODOC_TOKEN: ${{ secrets.AUTODOC_TOKEN }}
+        run: |
+          set -u
+
+          if [ -z "${AUTODOC_API_URL:-}" ] || [ -z "${AUTODOC_PROJECT_ID:-}" ] || [ -z "${AUTODOC_TOKEN:-}" ]; then
+            echo "::warning::Auto-Doc secrets are missing. Configure AUTODOC_API_URL, AUTODOC_PROJECT_ID and AUTODOC_TOKEN."
+            exit 0
+          fi
+
+          AUTODOC_API_URL="${AUTODOC_API_URL%/}"
+          RESPONSE_FILE="$(mktemp)"
+          HTTP_STATUS=$(curl --silent --show-error --location --connect-timeout 15 --max-time 180 --output "$RESPONSE_FILE" --write-out "%{http_code}" -X POST "$AUTODOC_API_URL/api/cicd/analyze" \
+            -H "Authorization: Bearer $AUTODOC_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "projectId": "'$AUTODOC_PROJECT_ID'",
+              "repository": "${{ github.repository }}",
+              "branch": "${{ github.event_name == 'pull_request' && github.base_ref || github.ref_name }}",
+              "commit": "${{ github.sha }}",
+              "event": "${{ github.event_name }}"
+            }') || {
+              echo "::warning::Auto-Doc API is not reachable. Check that AUTODOC_API_URL is public and accessible from GitHub Actions."
+              exit 0
+            }
+
+          cat "$RESPONSE_FILE"
+
+          if [ "$HTTP_STATUS" -lt 200 ] || [ "$HTTP_STATUS" -ge 300 ]; then
+            echo "::warning::Auto-Doc API returned HTTP $HTTP_STATUS. The workflow is kept green to avoid noisy GitHub failure emails."
+            exit 0
+          fi
